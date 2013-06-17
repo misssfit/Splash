@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="14278e4b-e29e-43c1-86ca-b19d2d30bb73" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8000/Registry" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Registry.xsd" MetadataType="Schema" ID="b9807dfa-0989-483e-b164-3175dd8f8f97" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd1" />
+    <MetadataFile FileName="Registry1.xsd" MetadataType="Schema" ID="9c054c10-29c4-4c40-a94c-65ff4722cc72" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd2" />
+    <MetadataFile FileName="Registry.disco" MetadataType="Disco" ID="6b86bd4c-11d2-4aa6-b8a6-ef64f4e30b91" SourceId="1" SourceUrl="http://localhost:8000/Registry?disco" />
+    <MetadataFile FileName="Registry2.xsd" MetadataType="Schema" ID="c303b32b-b3c5-47b5-a7a4-5d9c5444d41e" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd0" />
+    <MetadataFile FileName="Registry.wsdl" MetadataType="Wsdl" ID="e2e13eff-837e-4dcd-8641-c552fcecbd8f" SourceId="1" SourceUrl="http://localhost:8000/Registry?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
