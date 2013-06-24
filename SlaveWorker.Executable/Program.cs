@@ -1,4 +1,5 @@
 ﻿using System;
+using Splash.SlaveWorker.Executable;
 
 namespace SlaveWorker.Executable
 {

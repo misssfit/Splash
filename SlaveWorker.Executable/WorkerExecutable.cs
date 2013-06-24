@@ -4,10 +4,11 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Description;
-using SlaveWorker.Executable.ServiceRegistry;
+using SlaveWorker;
 using SlaveWorker.Interfaces;
+using Splash.SlaveWorker.Executable.ServiceRegistry;
 
-namespace SlaveWorker.Executable
+namespace Splash.SlaveWorker.Executable
 {
     public class WorkerExecutable
     {

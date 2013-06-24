@@ -7,8 +7,8 @@
     <ProjectGuid>{F15CEC6B-8205-4DF4-A44C-8EA16A1B480B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SlaveWorker.Executable</RootNamespace>
-    <AssemblyName>SlaveWorker.Executable</AssemblyName>
+    <RootNamespace>Splash.SlaveWorker.Executable</RootNamespace>
+    <AssemblyName>Splash.SlaveWorker.Executable</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,23 +67,26 @@
     <None Include="Service References\ServiceRegistry\Registry2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceRegistry\Splash.SlaveWorker.Executable.ServiceRegistry.ServerConnectionInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Splash.Common.csproj">
       <Project>{a5379f4c-f49b-4eb2-8f7d-0abdcb95ee5c}</Project>
-      <Name>Common</Name>
+      <Name>Splash.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McdaMethodsContract\McdaMethodsContract.csproj">
+    <ProjectReference Include="..\McdaMethodsContract\Splash.McdaMethodsContract.csproj">
       <Project>{2efc560d-686d-4f38-bfb8-a4f3ed649927}</Project>
-      <Name>McdaMethodsContract</Name>
+      <Name>Splash.McdaMethodsContract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sensor\MeasurementSensor.csproj">
+    <ProjectReference Include="..\Sensor\Splash.MeasurementSensor.csproj">
       <Project>{b8f9c9cb-311b-46d9-b948-b9c5a3f36874}</Project>
-      <Name>MeasurementSensor</Name>
+      <Name>Splash.MeasurementSensor</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SlaveWorker\SlaveWorker.csproj">
+    <ProjectReference Include="..\SlaveWorker\Splash.SlaveWorker.csproj">
       <Project>{34d3df14-6c29-4267-a51b-4c018a3ad071}</Project>
-      <Name>SlaveWorker</Name>
+      <Name>Splash.SlaveWorker</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

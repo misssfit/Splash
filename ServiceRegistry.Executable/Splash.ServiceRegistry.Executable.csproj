@@ -7,8 +7,8 @@
     <ProjectGuid>{C099A08D-4A31-4589-8E11-7C35FA62BB9B}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ServiceRegistry.Executable</RootNamespace>
-    <AssemblyName>ServiceRegistry.Executable</AssemblyName>
+    <RootNamespace>Splash.ServiceRegistry.Executable</RootNamespace>
+    <AssemblyName>Splash.ServiceRegistry.Executable</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,13 +49,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
+    <ProjectReference Include="..\Common\Splash.Common.csproj">
       <Project>{A5379F4C-F49B-4EB2-8F7D-0ABDCB95EE5C}</Project>
-      <Name>Common</Name>
+      <Name>Splash.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceRegistry\ServiceRegistry.csproj">
+    <ProjectReference Include="..\ServiceRegistry\Splash.ServiceRegistry.csproj">
       <Project>{8866c01e-550e-48c3-b14c-1591a1477571}</Project>
-      <Name>ServiceRegistry</Name>
+      <Name>Splash.ServiceRegistry</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
