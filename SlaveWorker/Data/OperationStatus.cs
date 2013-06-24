@@ -1,8 +1,10 @@
-﻿namespace Splash.SlaveWorker.Data
+﻿using Splash.RemoteServiceContract;
+
+namespace Splash.SlaveWorker.Data
 {
-    public class OperationStatus
+    public class OperationStatus : IMethodInvocationResult
     {
         public string Id { get; set; }
-        public RequestStatus Status { get; set; }
+        public RemoteServiceContract.RequestStatus Status { get; set; }
     }
 }

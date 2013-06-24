@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Data;
 using Splash.SlaveWorker.Interfaces;
 
 namespace Splash.SlaveWorker
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class Worker : IWorker, IAdministrationService
+    public class Worker : IWorker, IAdministrationService, IRemoteService
     {
         public Worker()
         {
@@ -20,7 +21,7 @@ namespace Splash.SlaveWorker
             return result;
         }
 
-        public OperationStatus PrioritizeTask(string id)
+        public IMethodInvocationResult PrioritizeTask(string id)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Id = id;
@@ -30,7 +31,7 @@ namespace Splash.SlaveWorker
             return operationStatus;
         }
 
-        public OperationStatus DeleteAll(TaskPool pool)
+        public IMethodInvocationResult DeleteAll(TaskPool pool)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Status = TaskQueueManager.Instance.DeleteAll(pool) ? RequestStatus.Ok : RequestStatus.Error;
@@ -74,15 +75,9 @@ namespace Splash.SlaveWorker
             return MethodRegistry.Instance.GetAll();
         }
 
-        public OperationStatus Calculate(string methodName, List<KeyValuePair<string, double[][]>> inputParameters)
-        {
-            var operationStatus = new OperationStatus();
-            operationStatus.Id = TaskQueueManager.Instance.CreateNewTask(methodName, inputParameters);
-            operationStatus.Status = RequestStatus.NotReady;
-            return operationStatus;
-        }
+  
 
-        public OperationStatus DeleteTask(string id)
+        public IMethodInvocationResult DeleteTask(string id)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Id = id;
@@ -94,6 +89,14 @@ namespace Splash.SlaveWorker
         {
             CalculationResult calculationResult = TaskQueueManager.Instance.GetResult(id);
             return calculationResult;
+        }
+
+        public IMethodInvocationResult Invoke(IMessage message)
+        {
+            var operationStatus = new OperationStatus();
+            operationStatus.Id = TaskQueueManager.Instance.AddNew(message);
+            operationStatus.Status = RequestStatus.NotReady;
+            return operationStatus;
         }
     }
 }

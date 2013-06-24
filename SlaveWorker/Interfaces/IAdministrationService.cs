@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Data;
 
 namespace Splash.SlaveWorker.Interfaces
@@ -11,10 +12,10 @@ namespace Splash.SlaveWorker.Interfaces
         List<KeyValuePair<TaskPool, List<TaskInfo>>> GetAllTasks();
 
         [OperationContract]
-        OperationStatus PrioritizeTask(string id);
+        IMethodInvocationResult PrioritizeTask(string id);
 
         [OperationContract]
-        OperationStatus DeleteAll(TaskPool pool);
+        IMethodInvocationResult DeleteAll(TaskPool pool);
 
         [OperationContract]
         void RefreshMethodRegistry();

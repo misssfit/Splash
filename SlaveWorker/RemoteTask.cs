@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using Splash.Common;
-using Splash.McdaMethodsContract;
+using Splash.RemoteMethodsContract;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Data;
 
 namespace Splash.SlaveWorker
 {
-    public class CalculationTask : ActiveObject
+    public class RemoteTask : ActiveObject
     {
-        private readonly List<KeyValuePair<string, double[][]>> _inputParameters;
-        private readonly string _methodName;
 
-        public CalculationTask(string methodName, List<KeyValuePair<string, double[][]>> inputParameters)
+
+        private readonly string _methodName;
+        private Lazy<IRemoteMethod> _remoteMethod;
+        private List<IParameter> _parameters;
+
+        public RemoteTask(IMessage taskInfo)
         {
-            _inputParameters = inputParameters;
-            _methodName = methodName;
+            _parameters = taskInfo.MethodParameters;
+            _methodName = taskInfo.MethodName;
             Id = Guid.NewGuid().ToString();
             CreationTimestamp = DateTime.UtcNow;
             Status = TaskStatus.NotStarted;
+            _remoteMethod = MethodResolver.Instance.Resolve(_methodName);
+
         }
 
         public string Id { get; private set; }
@@ -50,8 +56,7 @@ namespace Splash.SlaveWorker
             CalculationStartTimestamp = DateTime.UtcNow;
             try
             {
-                IMcdaMethod methodObject = MethodRegistry.Instance.GetMethodObject(_methodName);
-                var result = methodObject.Calculate(_inputParameters);
+                var result = _remoteMethod.Value.Calculate(_parameters);
                 Data = result;
             }
             catch (Exception e)

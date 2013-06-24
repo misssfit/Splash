@@ -2,68 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
+using Splash.Common;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Data;
 
 namespace Splash.SlaveWorker
 {
-    public class TaskQueueManager : TimerBasedObject
+    public class TaskQueueManager : Singleton<TaskQueueManager>
     {
-        private static TaskQueueManager _instance;
-        private static readonly object _instanceLock = new object();
+        private readonly List<RemoteTask> _activeTasks = new List<RemoteTask>();
+        private readonly List<RemoteTask> _inactiveTasks = new List<RemoteTask>();
+        private readonly List<RemoteTask> _tasksQueue = new List<RemoteTask>();
 
-        private readonly List<CalculationTask> _activeTasks = new List<CalculationTask>();
-        private readonly List<CalculationTask> _inactiveTasks = new List<CalculationTask>();
-        private readonly List<CalculationTask> _tasksQueue = new List<CalculationTask>();
+        private Timer _cleanInactiveTasksTimer;
+        private Timer _cleanTimedOutTasksTimer;
+        private Timer _workerTimer;
 
-        protected Timer _cleanInactiveTasksTimer;
-        protected Timer _cleanTimedOutTasksTimer;
 
-        protected TaskQueueManager()
-            : base(Configuration.TasksQueueManagerCheckInterval)
+        public TaskQueueManager()
         {
-            _cleanInactiveTasksTimer = new Timer();
-            _cleanInactiveTasksTimer.Elapsed += CleanInactiveTasks;
-            _cleanInactiveTasksTimer.Interval = Configuration.CalculatedTasksTimeoutCheckInterval;
-            _cleanInactiveTasksTimer.Enabled = true;
-            _cleanInactiveTasksTimer.Start();
-
-            _cleanTimedOutTasksTimer = new Timer();
-            _cleanTimedOutTasksTimer.Elapsed += CleanTimedOutTasks;
-            _cleanTimedOutTasksTimer.Interval = Configuration.TasksCalculationTimeoutCheckInterval;
-            _cleanTimedOutTasksTimer.Enabled = true;
-            _cleanTimedOutTasksTimer.Start();
+            _cleanInactiveTasksTimer = InitializeNewTimer(CleanInactiveTasks, Configuration.CalculatedTasksTimeoutCheckInterval);
+            _cleanTimedOutTasksTimer = InitializeNewTimer(CleanTimedOutTasks, Configuration.TasksCalculationTimeoutCheckInterval);
+            _workerTimer = InitializeNewTimer(PerformWork, Configuration.TasksCalculationTimeoutCheckInterval);
         }
 
-        public static TaskQueueManager Instance
+        private Timer InitializeNewTimer(ElapsedEventHandler onTick, int interval)
         {
-            get
-            {
-                lock (_instanceLock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new TaskQueueManager();
-                    }
-                    return _instance;
-                }
-            }
+            var timer = new Timer();
+            timer.Elapsed += onTick;
+            timer.Interval = interval;
+            timer.Enabled = true;
+            timer.Start();
+            return timer;
         }
 
-
-        internal string CreateNewTask(string methodName, List<KeyValuePair<string, double[][]>> inputParameters)
-        {
-            lock (_tasksQueue)
-            {
-                var task = new CalculationTask(methodName, inputParameters);
-                _tasksQueue.Add(task);
-                Console.WriteLine("Created task: " + task);
-                return task.Id;
-            }
-        }
 
         internal bool DeleteTask(string id)
         {
-            CalculationTask task = null;
+            RemoteTask task = null;
             lock (_tasksQueue)
             {
                 if (_tasksQueue.Any(p => p.Id == id) == true)
@@ -115,7 +91,7 @@ namespace Splash.SlaveWorker
             {
                 if (_inactiveTasks.Any(p => p.Id == id) == true)
                 {
-                    CalculationTask task = null;
+                    RemoteTask task = null;
                     lock (_inactiveTasks)
                     {
                         task = _inactiveTasks.Single(p => p.Id == id);
@@ -162,7 +138,7 @@ namespace Splash.SlaveWorker
             {
                 if (_tasksQueue.Any(p => p.Id == id) == true)
                 {
-                    CalculationTask task = _tasksQueue.Single(p => p.Id == id);
+                    RemoteTask task = _tasksQueue.Single(p => p.Id == id);
                     _tasksQueue.Remove(task);
                     _tasksQueue.Insert(0, task);
                     Console.WriteLine("Task with id: " + id + "moved to the top of the queue.");
@@ -215,7 +191,7 @@ namespace Splash.SlaveWorker
                 case TaskPool.Active:
                     lock (_activeTasks)
                     {
-                        foreach (CalculationTask task in _activeTasks)
+                        foreach (RemoteTask task in _activeTasks)
                         {
                             try
                             {
@@ -235,14 +211,14 @@ namespace Splash.SlaveWorker
         }
 
 
-        protected override void OnTick(object sender, ElapsedEventArgs e)
+        protected void PerformWork(object sender, ElapsedEventArgs e)
         {
             lock (_activeTasks)
             {
                 if (_activeTasks.Any(p => p.IsActive == false) == true)
                 {
-                    List<CalculationTask> tasksToMove = _activeTasks.Where(p => p.IsActive == false).ToList();
-                    foreach (CalculationTask task in tasksToMove)
+                    List<RemoteTask> tasksToMove = _activeTasks.Where(p => p.IsActive == false).ToList();
+                    foreach (RemoteTask task in tasksToMove)
                     {
                         Console.WriteLine("Finished: " + task);
                         _activeTasks.Remove(task);
@@ -258,7 +234,7 @@ namespace Splash.SlaveWorker
                     {
                         if (_tasksQueue.Any() == true)
                         {
-                            CalculationTask task = _tasksQueue.First();
+                            RemoteTask task = _tasksQueue.First();
                             task.Run();
                             Console.WriteLine("Started: " + task);
                             _tasksQueue.RemoveAt(0);
@@ -273,7 +249,7 @@ namespace Splash.SlaveWorker
         {
             lock (_activeTasks)
             {
-                List<CalculationTask> toBeRemoved =
+                List<RemoteTask> toBeRemoved =
                     _activeTasks.FindAll(
                         p =>
                         DateTime.UtcNow.Subtract(p.CalculationStartTimestamp).TotalMilliseconds >=
@@ -285,7 +261,7 @@ namespace Splash.SlaveWorker
                 {
                     Console.WriteLine("Removing Timed Out Tasks in Progress | Count: " + toBeRemoved.Count);
 
-                    foreach (CalculationTask calculationTask in toBeRemoved)
+                    foreach (RemoteTask calculationTask in toBeRemoved)
                     {
                         Console.WriteLine("* To Remove:  " + calculationTask);
                         Console.WriteLine("** " +
@@ -303,7 +279,7 @@ namespace Splash.SlaveWorker
         {
             lock (_inactiveTasks)
             {
-                List<CalculationTask> toBeRemoved =
+                List<RemoteTask> toBeRemoved =
                     _inactiveTasks.FindAll(
                         p =>
                         DateTime.UtcNow.Subtract(p.CalculationFinishTimestamp).TotalMilliseconds >=
@@ -313,7 +289,7 @@ namespace Splash.SlaveWorker
                 {
                     Console.WriteLine("Removing Timed Out inactive tasks | Count: " + toBeRemoved.Count);
 
-                    foreach (CalculationTask calculationTask in toBeRemoved)
+                    foreach (RemoteTask calculationTask in toBeRemoved)
                     {
                         Console.WriteLine("* To Remove:  " + calculationTask);
                         Console.WriteLine("** " +
@@ -332,6 +308,17 @@ namespace Splash.SlaveWorker
             lock (_tasksQueue)
             {
                 return _tasksQueue.Count.ToString();
+            }
+        }
+
+        public string AddNew(IMessage message)
+        {
+            lock (_tasksQueue)
+            {
+                var task = new RemoteTask(message);
+                _tasksQueue.Add(task);
+                Console.WriteLine("Created task: " + task);
+                return task.Id;
             }
         }
     }

@@ -76,9 +76,13 @@
       <Project>{a5379f4c-f49b-4eb2-8f7d-0abdcb95ee5c}</Project>
       <Name>Splash.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McdaMethodsContract\Splash.McdaMethodsContract.csproj">
+    <ProjectReference Include="..\McdaMethodsContract\Splash.RemoteMethodsContract.csproj">
       <Project>{2efc560d-686d-4f38-bfb8-a4f3ed649927}</Project>
-      <Name>Splash.McdaMethodsContract</Name>
+      <Name>Splash.RemoteMethodsContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServiceContract\Splash.RemoteServiceContract.csproj">
+      <Project>{4eff0392-9aae-40ee-bd70-fb95a0dca167}</Project>
+      <Name>Splash.RemoteServiceContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sensor\Splash.MeasurementSensor.csproj">
       <Project>{b8f9c9cb-311b-46d9-b948-b9c5a3f36874}</Project>

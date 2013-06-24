@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Splash.McdaMethodsContract
+namespace Splash.RemoteMethodsContract
 {
-    public class McdaMethodInfo
+    public class RemoteMethodInfo
     {
         public string Name { get; set; }
         public List<string> Input { get; set; }

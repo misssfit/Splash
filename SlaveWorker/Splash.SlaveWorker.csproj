@@ -41,13 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MethodResolver.cs" />
     <Compile Include="Worker.cs" />
-    <Compile Include="CalculationTask.cs" />
+    <Compile Include="RemoteTask.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Data\CalculationResult.cs" />
     <Compile Include="Data\MethodDescription.cs" />
     <Compile Include="Data\OperationStatus.cs" />
-    <Compile Include="Data\RequestStatus.cs" />
     <Compile Include="Data\TaskInfo.cs" />
     <Compile Include="Data\TaskPool.cs" />
     <Compile Include="Interfaces\IAdministrationService.cs" />
@@ -57,7 +57,6 @@
     <Compile Include="QueueSnsor.cs" />
     <Compile Include="TaskQueueManager.cs" />
     <Compile Include="Data\TaskStatus.cs" />
-    <Compile Include="TimerBasedObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,9 +64,13 @@
       <Project>{A5379F4C-F49B-4EB2-8F7D-0ABDCB95EE5C}</Project>
       <Name>Splash.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\McdaMethodsContract\Splash.McdaMethodsContract.csproj">
+    <ProjectReference Include="..\McdaMethodsContract\Splash.RemoteMethodsContract.csproj">
       <Project>{2EFC560D-686D-4F38-BFB8-A4F3ED649927}</Project>
-      <Name>Splash.McdaMethodsContract</Name>
+      <Name>Splash.RemoteMethodsContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServiceContract\Splash.RemoteServiceContract.csproj">
+      <Project>{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}</Project>
+      <Name>Splash.RemoteServiceContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sensor\Splash.MeasurementSensor.csproj">
       <Project>{b8f9c9cb-311b-46d9-b948-b9c5a3f36874}</Project>

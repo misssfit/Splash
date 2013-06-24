@@ -13,11 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.MeasurementSensor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.ServiceRegistry.Executable", "ServiceRegistry.Executable\Splash.ServiceRegistry.Executable.csproj", "{C099A08D-4A31-4589-8E11-7C35FA62BB9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.McdaMethodsContract", "McdaMethodsContract\Splash.McdaMethodsContract.csproj", "{2EFC560D-686D-4F38-BFB8-A4F3ED649927}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.RemoteMethodsContract", "McdaMethodsContract\Splash.RemoteMethodsContract.csproj", "{2EFC560D-686D-4F38-BFB8-A4F3ED649927}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.SlaveWorker.Executable", "SlaveWorker.Executable\Splash.SlaveWorker.Executable.csproj", "{F15CEC6B-8205-4DF4-A44C-8EA16A1B480B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.RemoteServiceContract", "RemoteServiceContract\Splash.RemoteServiceContract.csproj", "{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.ClientCommunicationLayer", "ClientCommunicationLayer\Splash.ClientCommunicationLayer.csproj", "{EF780253-D41B-4A38-BD7B-3616EC1F4731}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using Splash.RemoteServiceContract;
 
-namespace Splash.McdaMethodsContract
+namespace Splash.RemoteMethodsContract
 {
-    public interface IMcdaMethod
+    public interface IRemoteMethod
     {
-        McdaMethodInfo MethodMetadata { get; }
-        double[][] Calculate(List<KeyValuePair<string, double[][]>> _inputParameters);
+        RemoteMethodInfo MethodMetadata { get; }
+        double[][] Calculate(List<IParameter> _inputParameters);
     }
 }

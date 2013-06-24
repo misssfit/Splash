@@ -1,4 +1,4 @@
-﻿namespace Splash.SlaveWorker.Data
+﻿namespace Splash.RemoteServiceContract
 {
     public enum RequestStatus
     {

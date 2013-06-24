@@ -8,8 +8,8 @@
     <ProjectGuid>{2EFC560D-686D-4F38-BFB8-A4F3ED649927}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Splash.McdaMethodsContract</RootNamespace>
-    <AssemblyName>Splash.McdaMethodsContract</AssemblyName>
+    <RootNamespace>Splash.RemoteMethodsContract</RootNamespace>
+    <AssemblyName>Splash.RemoteMethodsContract</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -47,6 +47,12 @@
     <Compile Include="IMcdaMethod.cs" />
     <Compile Include="McdaMethodInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RemoteServiceContract\Splash.RemoteServiceContract.csproj">
+      <Project>{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}</Project>
+      <Name>Splash.RemoteServiceContract</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

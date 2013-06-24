@@ -1,4 +1,5 @@
 ﻿using System.ServiceModel;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Data;
 
 namespace Splash.SlaveWorker.Interfaces
@@ -7,6 +8,6 @@ namespace Splash.SlaveWorker.Interfaces
     public interface ITaskDeleter
     {
         [OperationContract]
-        OperationStatus DeleteTask(string id);
+        IMethodInvocationResult DeleteTask(string id);
     }
 }

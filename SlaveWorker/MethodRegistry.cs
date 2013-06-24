@@ -6,26 +6,29 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Splash.McdaMethodsContract;
+using Splash.Common;
+using Splash.RemoteMethodsContract;
 using Splash.SlaveWorker.Data;
 
 namespace Splash.SlaveWorker
 {
-    public class MethodRegistry
+    public class MethodRegistry : Singleton<MethodRegistry>
     {
-        private static MethodRegistry _instance;
-        private static readonly object _instanceLock = new object();
+
         private static readonly object _methodListLock = new object();
 
 
         private readonly DirectoryInfo _directoryInfo;
+        [Obsolete("Use configuration manager")]
         public string _externalLibraryPath = "..\\..\\..\\ExternalLibraries";
         private FileSystemWatcher _fileSystemWatcher;
 
-        [ImportMany(typeof (IMcdaMethod))] 
-        private List<IMcdaMethod> _methods;
+        [ImportMany(typeof(IRemoteMethod))]
+#pragma warning disable 649
+        private List<IRemoteMethod> _methods;
+#pragma warning restore 649
 
-        protected MethodRegistry()
+        public MethodRegistry()
         {
             AppDomain.CurrentDomain.SetShadowCopyFiles();
             _directoryInfo = new DirectoryInfo(_externalLibraryPath);
@@ -33,20 +36,7 @@ namespace Splash.SlaveWorker
             Compose();
         }
 
-        public static MethodRegistry Instance
-        {
-            get
-            {
-                lock (_instanceLock)
-                {
-                    if (_instance == null)
-                    {
-                        _instance = new MethodRegistry();
-                    }
-                    return _instance;
-                }
-            }
-        }
+
 
         public void Run()
         {
@@ -97,13 +87,13 @@ namespace Splash.SlaveWorker
                 return
                     _methods.Select(
                         p =>
-                        new MethodDescription {MethodName = p.MethodMetadata.Name, Parameters = p.MethodMetadata.Input})
+                        new MethodDescription { MethodName = p.MethodMetadata.Name, Parameters = p.MethodMetadata.Input })
                             .ToList();
             }
         }
 
 
-        internal IMcdaMethod GetMethodObject(string methodName)
+        internal IRemoteMethod GetMethodObject(string methodName)
         {
             lock (_methodListLock)
             {
@@ -127,7 +117,7 @@ namespace Splash.SlaveWorker
                 {
                     var directoryCatalog = new DirectoryCatalog(_directoryInfo.FullName);
                     var assemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-                    var catalog = new AggregateCatalog(new ComposablePartCatalog[] {assemblyCatalog, directoryCatalog});
+                    var catalog = new AggregateCatalog(new ComposablePartCatalog[] { assemblyCatalog, directoryCatalog });
 
                     var container = new CompositionContainer(catalog);
                     container.ComposeParts(this);
