@@ -1,4 +1,4 @@
-﻿namespace CalculatingEngine.Data
+﻿namespace Splash.SlaveWorker.Data
 {
     public class OperationStatus
     {

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace Common
+namespace Splash.Common
 {
     public class Subscription
     {

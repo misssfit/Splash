@@ -5,9 +5,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
-using Common;
+using Splash.Common;
 
-namespace ServiceRegistry
+namespace Splash.ServiceRegistry
 {
     internal class SlaveController : ActiveObject
     {

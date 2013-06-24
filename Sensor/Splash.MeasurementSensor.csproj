@@ -8,8 +8,8 @@
     <ProjectGuid>{B8F9C9CB-311B-46D9-B948-B9C5A3F36874}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MeasurementSensor</RootNamespace>
-    <AssemblyName>MeasurementSensor</AssemblyName>
+    <RootNamespace>Splash.MeasurementSensor</RootNamespace>
+    <AssemblyName>Splash.MeasurementSensor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

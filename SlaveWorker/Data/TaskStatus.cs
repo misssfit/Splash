@@ -1,4 +1,4 @@
-﻿namespace SlaveWorker.Data
+﻿namespace Splash.SlaveWorker.Data
 {
     public enum TaskStatus
     {

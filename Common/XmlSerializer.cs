@@ -3,7 +3,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
-namespace Common
+namespace Splash.Common
 {
     public static class Serializer
     {

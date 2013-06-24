@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace McdaMethodsContract
+namespace Splash.McdaMethodsContract
 {
     public class McdaMethodInfo
     {

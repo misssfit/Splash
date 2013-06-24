@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
-using Common;
+using Splash.Common;
 
-namespace ServiceRegistry
+namespace Splash.ServiceRegistry
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Registry : Singleton<Registry>, IRegistry

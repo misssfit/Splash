@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using Common;
+using Splash.Common;
 
-namespace MeasurementSensor
+namespace Splash.MeasurementSensor
 {
     public class RamSensor : Sensor
     {

@@ -1,8 +1,8 @@
 ﻿using System;
-using Common;
-using MeasurementSensor;
+using Splash.Common;
+using Splash.MeasurementSensor;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     public class QueueSnsor : Sensor
     {

@@ -1,6 +1,4 @@
-﻿using RemoteServiceContract;
-
-namespace Splash.RemoteServiceContract
+﻿namespace Splash.RemoteServiceContract
 {
     public interface IRemoteMethod
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace McdaMethodsContract
+namespace Splash.McdaMethodsContract
 {
     public static class ArrayHelper
     {

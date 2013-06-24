@@ -1,4 +1,4 @@
-﻿namespace Server
+﻿namespace Splash.Server
 {
     public interface IMasterServer
     {

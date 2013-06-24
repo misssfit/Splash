@@ -2,7 +2,7 @@
 using System.ServiceModel;
 using System.ServiceModel.Description;
 
-namespace ServiceRegistry.Executable
+namespace Splash.ServiceRegistry.Executable
 {
     internal class Program
     {

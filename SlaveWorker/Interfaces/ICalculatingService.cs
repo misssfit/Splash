@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
-using CalculatingEngine.Data;
-using SlaveWorker.Data;
+using Splash.SlaveWorker.Data;
 
-namespace SlaveWorker.Interfaces
+namespace Splash.SlaveWorker.Interfaces
 {
     [ServiceContract]
     public interface IWorker : ITaskDeleter

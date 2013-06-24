@@ -1,7 +1,6 @@
 ﻿using System;
-using Splash.SlaveWorker.Executable;
 
-namespace SlaveWorker.Executable
+namespace Splash.SlaveWorker.Executable
 {
     internal class Program
     {

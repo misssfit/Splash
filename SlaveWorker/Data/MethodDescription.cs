@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SlaveWorker.Data
+namespace Splash.SlaveWorker.Data
 {
     public class MethodDescription
     {

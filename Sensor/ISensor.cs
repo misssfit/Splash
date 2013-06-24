@@ -1,4 +1,4 @@
-﻿namespace MeasurementSensor
+﻿namespace Splash.MeasurementSensor
 {
     internal interface ISensor
     {

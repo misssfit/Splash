@@ -6,10 +6,10 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using McdaMethodsContract;
-using SlaveWorker.Data;
+using Splash.McdaMethodsContract;
+using Splash.SlaveWorker.Data;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     public class MethodRegistry
     {

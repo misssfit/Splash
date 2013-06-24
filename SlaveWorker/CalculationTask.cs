@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using CalculatingEngine.Data;
-using Common;
-using McdaMethodsContract;
-using SlaveWorker.Data;
+using Splash.Common;
+using Splash.McdaMethodsContract;
+using Splash.SlaveWorker.Data;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     public class CalculationTask : ActiveObject
     {

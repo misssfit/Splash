@@ -1,4 +1,4 @@
-﻿namespace Common
+﻿namespace Splash.Common
 {
     public class ServerStatus
     {

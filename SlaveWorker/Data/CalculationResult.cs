@@ -1,6 +1,4 @@
-﻿using CalculatingEngine.Data;
-
-namespace SlaveWorker.Data
+﻿namespace Splash.SlaveWorker.Data
 {
     public class CalculationResult
     {

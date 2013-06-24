@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace Common
+namespace Splash.Common
 {
     public abstract class TimerBasedObject
     {

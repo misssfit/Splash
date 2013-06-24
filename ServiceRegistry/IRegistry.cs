@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
-using Common;
+using Splash.Common;
 
-namespace ServiceRegistry
+namespace Splash.ServiceRegistry
 {
     [ServiceContract]
     public interface IRegistry

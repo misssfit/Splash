@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ServiceModel;
-using CalculatingEngine.Data;
-using SlaveWorker.Data;
-using SlaveWorker.Interfaces;
+using Splash.SlaveWorker.Data;
+using Splash.SlaveWorker.Interfaces;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class Worker : IWorker, IAdministrationService

@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ServiceRegistry.Registry" CodeBehind="Registry.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Splash.ServiceRegistry.Registry" CodeBehind="Registry.svc.cs" %>

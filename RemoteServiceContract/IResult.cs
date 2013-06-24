@@ -1,4 +1,4 @@
-﻿namespace RemoteServiceContract
+﻿namespace Splash.RemoteServiceContract
 {
     public interface IResult
     {

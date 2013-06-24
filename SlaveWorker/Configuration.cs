@@ -1,4 +1,4 @@
-﻿namespace SlaveWorker
+﻿namespace Splash.SlaveWorker
 {
     public static class Configuration
     {

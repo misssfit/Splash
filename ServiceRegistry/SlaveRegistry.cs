@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common;
+using Splash.Common;
 
-namespace ServiceRegistry
+namespace Splash.ServiceRegistry
 {
     public class SlaveRegistry : Singleton<SlaveRegistry>
     {

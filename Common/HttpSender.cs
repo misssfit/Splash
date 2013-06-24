@@ -5,11 +5,11 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Common
+namespace Splash.Common
 {
     public class HttpSender
     {
-        private static readonly CookieContainer cookieContainer;
+        private static readonly CookieContainer CookieContainer;
 
 
         /// <summary>
@@ -17,7 +17,7 @@ namespace Common
         /// </summary>
         static HttpSender()
         {
-            cookieContainer = new CookieContainer();
+            CookieContainer = new CookieContainer();
             ServicePointManager.ServerCertificateValidationCallback += ValidateServerCertificate;
         }
 
@@ -36,7 +36,7 @@ namespace Common
         /// <exception cref="InvalidOperationException">The stream is already in use by a previous call to BeginGetResponse.</exception>
         public HttpWebResponse Send(HttpWebRequest request)
         {
-            request.CookieContainer = cookieContainer;
+            request.CookieContainer = CookieContainer;
             HttpWebResponse response;
             try
             {

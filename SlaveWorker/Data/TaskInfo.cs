@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SlaveWorker.Data
+namespace Splash.SlaveWorker.Data
 {
     public class TaskInfo
     {

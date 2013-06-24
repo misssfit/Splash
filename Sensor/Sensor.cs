@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Timers;
 using System.Web.Script.Serialization;
-using Common;
+using Splash.Common;
 
-namespace MeasurementSensor
+namespace Splash.MeasurementSensor
 {
     public abstract class Sensor : ActiveObject, ISensor
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Common
+namespace Splash.Common
 {
     public abstract class ActiveObject
     {

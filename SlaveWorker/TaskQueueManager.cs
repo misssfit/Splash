@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Timers;
-using CalculatingEngine.Data;
-using SlaveWorker.Data;
+using Splash.SlaveWorker.Data;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     public class TaskQueueManager : TimerBasedObject
     {

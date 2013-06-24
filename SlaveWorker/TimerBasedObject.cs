@@ -1,6 +1,6 @@
 ﻿using System.Timers;
 
-namespace SlaveWorker
+namespace Splash.SlaveWorker
 {
     public abstract class TimerBasedObject
     {
