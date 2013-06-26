@@ -8,6 +8,6 @@ namespace Splash.SlaveWorker.Interfaces
     public interface ITaskDeleter
     {
         [OperationContract]
-        IMethodInvocationResult DeleteTask(string id);
+        OperationStatus DeleteTask(string id);
     }
 }

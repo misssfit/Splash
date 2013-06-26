@@ -20,7 +20,7 @@ namespace Splash.SlaveWorker
 
         private readonly DirectoryInfo _directoryInfo;
         [Obsolete("Use configuration manager")]
-        public string _externalLibraryPath = "..\\..\\..\\ExternalLibraries";
+        public string _externalLibraryPath = @"C:\Users\Kamil\Documents\Visual Studio 2012\Projects\DemoMethods\bin\Debug";
         private FileSystemWatcher _fileSystemWatcher;
 
         [ImportMany(typeof(IRemoteMethod))]

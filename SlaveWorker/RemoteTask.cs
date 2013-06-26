@@ -13,9 +13,9 @@ namespace Splash.SlaveWorker
 
         private readonly string _methodName;
         private Lazy<IRemoteMethod> _remoteMethod;
-        private List<IParameter> _parameters;
+        private List<ObjectParameter> _parameters;
 
-        public RemoteTask(IMessage taskInfo)
+        public RemoteTask(RemoteMessage taskInfo)
         {
             _parameters = taskInfo.MethodParameters;
             _methodName = taskInfo.MethodName;

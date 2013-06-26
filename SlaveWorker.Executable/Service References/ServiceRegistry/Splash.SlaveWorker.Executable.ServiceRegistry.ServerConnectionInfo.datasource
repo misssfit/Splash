@@ -6,5 +6,5 @@
     cause the file to be unrecognizable by the program.
 -->
 <GenericObjectDataSource DisplayName="ServerConnectionInfo" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>Splash.SlaveWorker.Executable.ServiceRegistry.ServerConnectionInfo</TypeInfo>
+   <TypeInfo>Splash.SlaveWorker.Executable.ServiceRegistry.ServerConnectionInfo, Service References.ServiceRegistry.Reference.cs, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

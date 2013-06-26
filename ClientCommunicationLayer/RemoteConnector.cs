@@ -9,7 +9,7 @@ namespace ClientCommunicationLayer
 {
     public class RemoteConnector
     {
-        public TReturn InvokeRemoteMethod<TReturn>(string methodName, params IParameter[] inputParameters)
+        public TReturn InvokeRemoteMethod<TReturn>(string methodName, params ObjectParameter[] inputParameters)
         {
             return default(TReturn);
         }

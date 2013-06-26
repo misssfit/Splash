@@ -6,6 +6,6 @@ namespace Splash.RemoteMethodsContract
     public interface IRemoteMethod
     {
         RemoteMethodInfo MethodMetadata { get; }
-        double[][] Calculate(List<IParameter> _inputParameters);
+        double[][] Calculate(List<ObjectParameter> _inputParameters);
     }
 }

@@ -12,10 +12,10 @@ namespace Splash.SlaveWorker.Interfaces
         List<KeyValuePair<TaskPool, List<TaskInfo>>> GetAllTasks();
 
         [OperationContract]
-        IMethodInvocationResult PrioritizeTask(string id);
+        OperationStatus PrioritizeTask(string id);
 
         [OperationContract]
-        IMethodInvocationResult DeleteAll(TaskPool pool);
+        OperationStatus DeleteAll(TaskPool pool);
 
         [OperationContract]
         void RefreshMethodRegistry();

@@ -44,8 +44,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArrayHelper.cs" />
-    <Compile Include="IMcdaMethod.cs" />
-    <Compile Include="McdaMethodInfo.cs" />
+    <Compile Include="IRemoteMethod.cs" />
+    <Compile Include="RemoteMethodInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

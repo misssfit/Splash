@@ -15,9 +15,10 @@ namespace Splash.ServiceRegistry
             _slaveController.Run();
         }
 
-        public ServerConnectionInfo AssignServer()
+        public string AssignServer()
         {
-            throw new NotImplementedException();
+           var result = SlaveRegistry.Instance.AssignServer();
+            return result;
         }
 
         public string AssignServerId()

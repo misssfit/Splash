@@ -42,5 +42,13 @@ namespace Splash.ServiceRegistry
                 server.QueueSize = int.Parse(measurement.Value);
             }
         }
+
+        public string AssignServer()
+        {
+            lock (_lock)
+            {
+                return _registredServers.First().Uri;
+            }
+        }
     }
 }

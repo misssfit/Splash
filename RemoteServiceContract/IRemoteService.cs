@@ -6,6 +6,13 @@ namespace Splash.RemoteServiceContract
     public interface IRemoteService
     {
         [OperationContract]
-        IMethodInvocationResult Invoke(IMessage message);
+        OperationStatus Invoke(RemoteMessage message);
+
+        //[OperationContract]
+        //List<MethodDescription> GetAllMethods();
+
+
+        //[OperationContract]
+        //CalculationResult GetResult(string id);
     }
 }

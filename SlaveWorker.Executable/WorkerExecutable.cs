@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Executable.ServiceRegistry;
 using Splash.SlaveWorker.Interfaces;
 
@@ -42,12 +43,13 @@ namespace Splash.SlaveWorker.Executable
         {
             //Create a URI to serve as the base address
             Uri httpUrl = DetermineWorkerUri(serviceId);
+            Console.WriteLine("Worker started: " + httpUrl);
             //Create ServiceHost
             _host = new ServiceHost(typeof(Worker), httpUrl);
             //Add a service endpoint
             var binding = new WSHttpBinding();
             binding.MaxReceivedMessageSize = int.MaxValue;
-            _host.AddServiceEndpoint(typeof(IWorker), binding, "");
+            _host.AddServiceEndpoint(typeof(IRemoteService), binding, httpUrl);
             //Enable metadata exchange
             var smb = new ServiceMetadataBehavior { HttpGetEnabled = true };
             _host.Description.Behaviors.Add(smb);

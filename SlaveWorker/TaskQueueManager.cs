@@ -23,7 +23,7 @@ namespace Splash.SlaveWorker
         {
             _cleanInactiveTasksTimer = InitializeNewTimer(CleanInactiveTasks, Configuration.CalculatedTasksTimeoutCheckInterval);
             _cleanTimedOutTasksTimer = InitializeNewTimer(CleanTimedOutTasks, Configuration.TasksCalculationTimeoutCheckInterval);
-            _workerTimer = InitializeNewTimer(PerformWork, Configuration.TasksCalculationTimeoutCheckInterval);
+            _workerTimer = InitializeNewTimer(PerformWork, 1000);
         }
 
         private Timer InitializeNewTimer(ElapsedEventHandler onTick, int interval)
@@ -311,7 +311,7 @@ namespace Splash.SlaveWorker
             }
         }
 
-        public string AddNew(IMessage message)
+        public string AddNew(RemoteMessage message)
         {
             lock (_tasksQueue)
             {

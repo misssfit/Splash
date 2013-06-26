@@ -14,7 +14,7 @@ namespace Splash.Common
         /// <param name="source">type to serialize</param>
         /// <param name="types"> </param>
         /// <returns>Xml reprezentation od T source as XDocument</returns>
-        public static XDocument SerializeToXDocument<T>(this T source, Type[] types) where T : class
+        public static XElement SerializeToXElement<T>(this T source, Type[] types) 
         {
             var target = new XDocument();
             var xmlSerializer = new XmlSerializer(typeof (T), types);
@@ -23,15 +23,15 @@ namespace Splash.Common
                 xmlSerializer.Serialize(writer, source);
                 writer.Close();
             }
-            return target;
+            return target.Root;
         }
 
-        public static XDocument SerializeToXDocument<T>(this T source) where T : class
+        public static XElement SerializeToXElement<T>(this T source) 
         {
-            return SerializeToXDocument(source, new[] {source.GetType()});
+            return SerializeToXElement(source, new[] {source.GetType()});
         }
 
-        public static T Deserialize<T>(this XDocument xmlDocument)
+        public static T Deserialize<T>(this XElement xmlDocument)
         {
             var xmlSerializer = new XmlSerializer(typeof (T));
             using (XmlReader reader = xmlDocument.CreateReader())

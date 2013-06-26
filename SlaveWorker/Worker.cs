@@ -8,7 +8,7 @@ using Splash.SlaveWorker.Interfaces;
 namespace Splash.SlaveWorker
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class Worker : IWorker, IAdministrationService, IRemoteService
+    public class Worker : IAdministrationService, IRemoteService
     {
         public Worker()
         {
@@ -21,7 +21,7 @@ namespace Splash.SlaveWorker
             return result;
         }
 
-        public IMethodInvocationResult PrioritizeTask(string id)
+        public OperationStatus PrioritizeTask(string id)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Id = id;
@@ -31,7 +31,7 @@ namespace Splash.SlaveWorker
             return operationStatus;
         }
 
-        public IMethodInvocationResult DeleteAll(TaskPool pool)
+        public OperationStatus DeleteAll(TaskPool pool)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Status = TaskQueueManager.Instance.DeleteAll(pool) ? RequestStatus.Ok : RequestStatus.Error;
@@ -75,9 +75,9 @@ namespace Splash.SlaveWorker
             return MethodRegistry.Instance.GetAll();
         }
 
-  
 
-        public IMethodInvocationResult DeleteTask(string id)
+
+        public OperationStatus DeleteTask(string id)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Id = id;
@@ -91,7 +91,7 @@ namespace Splash.SlaveWorker
             return calculationResult;
         }
 
-        public IMethodInvocationResult Invoke(IMessage message)
+        public OperationStatus Invoke(RemoteMessage message)
         {
             var operationStatus = new OperationStatus();
             operationStatus.Id = TaskQueueManager.Instance.AddNew(message);
