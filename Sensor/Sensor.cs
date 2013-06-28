@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Web.Script.Serialization;
 using Splash.Common;
+using Timer = System.Timers.Timer;
 
 namespace Splash.MeasurementSensor
 {
@@ -19,7 +21,7 @@ namespace Splash.MeasurementSensor
         private Socket _socket;
         private readonly object _lock = new object();
         private readonly Queue<string> _queue = new Queue<string>();
-
+        private int _sleepResolution ;
         public Sensor()
             : this(1000, "")
         {
@@ -27,6 +29,7 @@ namespace Splash.MeasurementSensor
 
         public Sensor(int resolution, string hostName)
         {
+            _sleepResolution = resolution/2;
             if (string.IsNullOrWhiteSpace(hostName) == true)
             {
                 _hostName = Environment.MachineName;
@@ -153,6 +156,7 @@ namespace Splash.MeasurementSensor
                         }
                     }
                 }
+                Thread.Sleep(_sleepResolution);
 
             }
 

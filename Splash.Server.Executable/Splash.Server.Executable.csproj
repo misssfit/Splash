@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A5379F4C-F49B-4EB2-8F7D-0ABDCB95EE5C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Splash.Common</RootNamespace>
-    <AssemblyName>Splash.Common</AssemblyName>
+    <RootNamespace>Splash.Server.Executable</RootNamespace>
+    <AssemblyName>Splash.Server.Executable</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -29,10 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,19 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ActiveObject.cs" />
-    <Compile Include="ConfigurationManager.cs" />
-    <Compile Include="HttpSender.cs" />
-    <Compile Include="Measurement.cs" />
-    <Compile Include="ServerConnectionInfo.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerStatus.cs" />
-    <Compile Include="ServiceExecutable.cs" />
-    <Compile Include="Singleton.cs" />
-    <Compile Include="Subscribe.cs" />
-    <Compile Include="Subscription.cs" />
-    <Compile Include="TimerBasedObject.cs" />
-    <Compile Include="XmlSerializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Splash.Common.csproj">
+      <Project>{A5379F4C-F49B-4EB2-8F7D-0ABDCB95EE5C}</Project>
+      <Name>Splash.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServiceContract\Splash.RemoteServiceContract.csproj">
+      <Project>{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}</Project>
+      <Name>Splash.RemoteServiceContract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Server\Splash.Server.csproj">
+      <Project>{F4BD004A-6331-4407-9CA6-242C0D306E1E}</Project>
+      <Name>Splash.Server</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

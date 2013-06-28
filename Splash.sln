@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.RemoteServiceContrac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.ClientCommunicationLayer", "ClientCommunicationLayer\Splash.ClientCommunicationLayer.csproj", "{EF780253-D41B-4A38-BD7B-3616EC1F4731}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Splash.Server.Executable", "Splash.Server.Executable\Splash.Server.Executable.csproj", "{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EF780253-D41B-4A38-BD7B-3616EC1F4731}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7419061-A956-4F65-90E3-CC4D1A7FC5C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

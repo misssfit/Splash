@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using Splash.Common;
 using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Executable.ServiceRegistry;
 using Splash.SlaveWorker.Interfaces;
@@ -27,7 +28,7 @@ namespace Splash.SlaveWorker.Executable
             CompleteRegistrationProcess(uri);
             string hostName = new Uri(id.Item1).Host;
             IPAddress ip = Dns.GetHostAddresses(hostName)[0];
-            _queueSensor = new QueueSnsor(5000, Id);
+            _queueSensor = new QueueSnsor(30000, Id);
             _queueSensor.Connect(ip.ToString(), 8001);
         }
 
@@ -41,21 +42,11 @@ namespace Splash.SlaveWorker.Executable
 
         private Uri Connect(string serviceId)
         {
-            //Create a URI to serve as the base address
             Uri httpUrl = DetermineWorkerUri(serviceId);
-            Console.WriteLine("Worker started: " + httpUrl);
-            //Create ServiceHost
-            _host = new ServiceHost(typeof(Worker), httpUrl);
-            //Add a service endpoint
-            var binding = new WSHttpBinding();
-            binding.MaxReceivedMessageSize = int.MaxValue;
-            _host.AddServiceEndpoint(typeof(IRemoteService), binding, httpUrl);
-            //Enable metadata exchange
-            var smb = new ServiceMetadataBehavior { HttpGetEnabled = true };
-            _host.Description.Behaviors.Add(smb);
-            //Start the Service
-            _host.Open();
 
+            ServiceExecutable serviceExecutable = new ServiceExecutable(typeof(IRemoteService), typeof(Worker), httpUrl);
+            serviceExecutable.InitialiseService();
+            _host = serviceExecutable.Host;
             return httpUrl;
         }
 
