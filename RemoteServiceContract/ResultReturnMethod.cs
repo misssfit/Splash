@@ -2,7 +2,7 @@
 {
     public enum ResultReturnMethod
     {
-        Memory,
+        ImmediateFromMemory,
         Email,
         DataStorage
     }

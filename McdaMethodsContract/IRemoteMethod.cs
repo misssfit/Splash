@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using Splash.RemoteServiceContract;
 
 namespace Splash.RemoteMethodsContract
@@ -6,6 +7,6 @@ namespace Splash.RemoteMethodsContract
     public interface IRemoteMethod
     {
         RemoteMethodInfo MethodMetadata { get; }
-        double[][] Calculate(List<ObjectParameter> _inputParameters);
+        XElement Calculate(List<ObjectParameter> _inputParameters);
     }
 }

@@ -28,7 +28,7 @@ namespace Splash.SlaveWorker.Executable
             CompleteRegistrationProcess(uri);
             string hostName = new Uri(id.Item1).Host;
             IPAddress ip = Dns.GetHostAddresses(hostName)[0];
-            _queueSensor = new QueueSnsor(30000, Id);
+            _queueSensor = new QueueSnsor(10000, Id);
             _queueSensor.Connect(ip.ToString(), 8001);
         }
 

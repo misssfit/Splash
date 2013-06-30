@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Splash.Common;
 using Splash.RemoteMethodsContract;
 using Splash.RemoteServiceContract;
@@ -32,7 +33,7 @@ namespace Splash.SlaveWorker
         public DateTime CalculationFinishTimestamp { get; private set; }
 
         public TaskStatus Status { get; private set; }
-        public double[][] Data { get; private set; }
+        public XElement Data { get; private set; }
 
         public TaskInfo TaskInfo
         {

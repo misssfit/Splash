@@ -45,16 +45,13 @@
     <Compile Include="Worker.cs" />
     <Compile Include="RemoteTask.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Data\CalculationResult.cs" />
     <Compile Include="Data\MethodDescription.cs" />
-    <Compile Include="Data\TaskInfo.cs" />
     <Compile Include="Data\TaskPool.cs" />
     <Compile Include="Interfaces\IAdministrationService.cs" />
     <Compile Include="Interfaces\ITaskDeleter.cs" />
     <Compile Include="MethodRegistry.cs" />
     <Compile Include="QueueSnsor.cs" />
     <Compile Include="TaskQueueManager.cs" />
-    <Compile Include="Data\TaskStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

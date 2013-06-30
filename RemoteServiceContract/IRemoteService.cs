@@ -12,7 +12,7 @@ namespace Splash.RemoteServiceContract
         //List<MethodDescription> GetAllMethods();
 
 
-        //[OperationContract]
-        //CalculationResult GetResult(string id);
+        [OperationContract]
+        CalculationResult GetResult(string id);
     }
 }

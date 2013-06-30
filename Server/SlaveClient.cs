@@ -14,5 +14,11 @@ namespace Splash.Server
         {
             return Channel.Invoke(message);
         }
+
+        public CalculationResult GetResult(string id)
+        {
+            return Channel.GetResult(id);
+
+        }
     }
 }

@@ -1,8 +1,10 @@
-﻿namespace Splash.SlaveWorker.Data
+﻿using System.Xml.Linq;
+
+namespace Splash.RemoteServiceContract
 {
     public class CalculationResult
     {
-        public double[][] Data { get; set; }
+        public XElement Data { get; set; }
         public TaskStatus Status { get; set; }
         public TaskInfo Info { get; set; }
     }

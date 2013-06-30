@@ -18,5 +18,28 @@ namespace Splash.Server
                 }
             }
         }
+
+        internal string GetAssignedWorker(string id)
+        {
+            lock (_lock)
+            {
+                if (_dictionary.ContainsKey(id) == true)
+                {
+                    return _dictionary[id];
+                }
+            }
+            return null;
+        }
+
+        internal void RemoveAssignedWorker(string id)
+        {
+            lock (_lock)
+            {
+                if (_dictionary.ContainsKey(id) == true)
+                {
+                    _dictionary.Remove(id);
+                }
+            }
+        }
     }
 }

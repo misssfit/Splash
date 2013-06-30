@@ -1,10 +1,11 @@
-﻿namespace Splash.SlaveWorker.Data
+﻿namespace Splash.RemoteServiceContract
 {
     public enum TaskStatus
     {
         NotStarted,
         Calculated,
         InProgress,
-        Corrupted
+        Corrupted,
+        NotFound
     }
 }

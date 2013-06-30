@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalculationResult.cs" />
     <Compile Include="IRemoteService.cs" />
     <Compile Include="ObjectParameter.cs" />
     <Compile Include="OperationStatus.cs" />
@@ -48,6 +49,8 @@
     <Compile Include="RemoteMessage.cs" />
     <Compile Include="RequestStatus.cs" />
     <Compile Include="ResultReturnMethod.cs" />
+    <Compile Include="TaskInfo.cs" />
+    <Compile Include="TaskStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

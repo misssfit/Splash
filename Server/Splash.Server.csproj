@@ -60,13 +60,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterServer.svc" />
-    <Content Include="Service References\RegistryServiceReference\Registry.disco" />
-    <Content Include="Service References\RegistryServiceReference\configuration91.svcinfo" />
-    <Content Include="Service References\RegistryServiceReference\configuration.svcinfo" />
-    <Content Include="Service References\RegistryServiceReference\Reference.svcmap">
+    <None Include="Service References\RegistryServiceReference\Registry.disco" />
+    <None Include="Service References\RegistryServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\RegistryServiceReference\configuration.svcinfo" />
+    <None Include="Service References\RegistryServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
+    </None>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +88,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service References\RegistryServiceReference\Registry.wsdl" />
+    <None Include="Service References\RegistryServiceReference\Registry.wsdl" />
     <None Include="Service References\RegistryServiceReference\Registry.xsd">
       <SubType>Designer</SubType>
     </None>

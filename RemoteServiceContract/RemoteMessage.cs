@@ -11,7 +11,7 @@ namespace Splash.RemoteServiceContract
 
         public RemoteMessage()
         {
-            ResultReturnMethod = ResultReturnMethod.Memory;
+            ResultReturnMethod = ResultReturnMethod.ImmediateFromMemory;
         }
     }
 }

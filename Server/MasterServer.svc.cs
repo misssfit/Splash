@@ -1,4 +1,6 @@
-﻿using Splash.RemoteServiceContract;
+﻿using System;
+using Splash.RemoteServiceContract;
+using Splash.Server.RegistryServiceReference;
 
 namespace Splash.Server
 {
@@ -6,23 +8,49 @@ namespace Splash.Server
     {
         static MasterServer()
         {
-            
+
         }
 
         public OperationStatus Invoke(RemoteMessage message)
         {
-            using (var registry = new RegistryServiceReference.RegistryClient())
+            try
             {
-                var serverUri = registry.AssignServer();
-                using (var worker = new SlaveClient(serverUri))
+                using (var registry = new RegistryClient())
                 {
-                    var slaveResponse = worker.Invoke(message);
-                    DelegatedTaskStorage.Instance.Add(slaveResponse.Id, serverUri);
-                    return slaveResponse;
+                    var serverUri = registry.AssignServer();
+                    using (var worker = new SlaveClient(serverUri))
+                    {
+                        var slaveResponse = worker.Invoke(message);
+                        DelegatedTaskStorage.Instance.Add(slaveResponse.Id, serverUri);
+                        return slaveResponse;
+                    }
                 }
             }
-          
-            //use registry, get slave, delegate calculation, store data
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return new OperationStatus { Status = RequestStatus.Error };
+            }
+
+        }
+
+        public CalculationResult GetResult(string id)
+        {
+            var serverUri = DelegatedTaskStorage.Instance.GetAssignedWorker(id);
+            if (string.IsNullOrWhiteSpace(serverUri) == true)
+            {
+                return new CalculationResult { Status = TaskStatus.NotFound };
+            }
+            using (var worker = new SlaveClient(serverUri))
+            {
+                var slaveResponse = worker.GetResult(id);
+                if (slaveResponse.Status == TaskStatus.Calculated || slaveResponse.Status == TaskStatus.Corrupted 
+                    || slaveResponse.Status == TaskStatus.NotFound)
+                {
+                    DelegatedTaskStorage.Instance.RemoveAssignedWorker(id);
+                }
+                return slaveResponse;
+            }
         }
     }
 }
