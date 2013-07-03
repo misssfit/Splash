@@ -21,21 +21,10 @@ namespace Splash.SlaveWorker
 
         public TaskQueueManager()
         {
-            _cleanInactiveTasksTimer = InitializeNewTimer(CleanInactiveTasks, Configuration.CalculatedTasksTimeoutCheckInterval);
-            _cleanTimedOutTasksTimer = InitializeNewTimer(CleanTimedOutTasks, Configuration.TasksCalculationTimeoutCheckInterval);
-            _workerTimer = InitializeNewTimer(PerformWork, 1000);
+            _cleanInactiveTasksTimer = TimerBasedObject.InitializeNewTimer(CleanInactiveTasks, Configuration.CalculatedTasksTimeoutCheckInterval);
+            _cleanTimedOutTasksTimer = TimerBasedObject.InitializeNewTimer(CleanTimedOutTasks, Configuration.TasksCalculationTimeoutCheckInterval);
+            _workerTimer = TimerBasedObject.InitializeNewTimer(PerformWork, 1000);
         }
-
-        private Timer InitializeNewTimer(ElapsedEventHandler onTick, int interval)
-        {
-            var timer = new Timer();
-            timer.Elapsed += onTick;
-            timer.Interval = interval;
-            timer.Enabled = true;
-            timer.Start();
-            return timer;
-        }
-
 
         internal bool DeleteTask(string id)
         {

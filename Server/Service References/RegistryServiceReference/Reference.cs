@@ -32,6 +32,12 @@ namespace Splash.Server.RegistryServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/AcknowlegdeRegistration", ReplyAction="http://tempuri.org/IRegistry/AcknowlegdeRegistrationResponse")]
         System.Threading.Tasks.Task<bool> AcknowlegdeRegistrationAsync(string serviceId, string uri);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/SynchronizeInactiveWorkers", ReplyAction="http://tempuri.org/IRegistry/SynchronizeInactiveWorkersResponse")]
+        string[] SynchronizeInactiveWorkers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/SynchronizeInactiveWorkers", ReplyAction="http://tempuri.org/IRegistry/SynchronizeInactiveWorkersResponse")]
+        System.Threading.Tasks.Task<string[]> SynchronizeInactiveWorkersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +89,14 @@ namespace Splash.Server.RegistryServiceReference {
         
         public System.Threading.Tasks.Task<bool> AcknowlegdeRegistrationAsync(string serviceId, string uri) {
             return base.Channel.AcknowlegdeRegistrationAsync(serviceId, uri);
+        }
+        
+        public string[] SynchronizeInactiveWorkers() {
+            return base.Channel.SynchronizeInactiveWorkers();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> SynchronizeInactiveWorkersAsync() {
+            return base.Channel.SynchronizeInactiveWorkersAsync();
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Splash.MeasurementSensor
         private Socket _socket;
         private readonly object _lock = new object();
         private readonly Queue<string> _queue = new Queue<string>();
-        private int _sleepResolution ;
+        private int _sleepResolution;
         public Sensor()
             : this(1000, "")
         {
@@ -29,7 +29,7 @@ namespace Splash.MeasurementSensor
 
         public Sensor(int resolution, string hostName)
         {
-            _sleepResolution = resolution/2;
+            _sleepResolution = resolution / 2;
             if (string.IsNullOrWhiteSpace(hostName) == true)
             {
                 _hostName = Environment.MachineName;
@@ -60,8 +60,6 @@ namespace Splash.MeasurementSensor
 
         }
 
-
-
         public void Disconnect()
         {
             _clock.Stop();
@@ -77,52 +75,6 @@ namespace Splash.MeasurementSensor
                 _queue.Enqueue(jsonObject);
             }
         }
-
-        // _sensorSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-        //try
-        //{
-        //    _sensorSocket.Connect(_hostEndPoint);
-        //}
-        //catch (Exception e)
-        //{
-        //    Console.WriteLine(e.Message);
-        //}
-
-        //try
-        //{
-        //    if (_sensorSocket.Connected == false)
-        //    {
-        //        // Connection failed, try next IPaddress.
-        //        Console.WriteLine("Unable to connect to host");
-        //        _sensorSocket.Connect(_hostEndPoint);
-        //    }
-        //    string jsonObject = _javaScriptSerializer.Serialize(measurement);
-        //    byte[] byData = Encoding.ASCII.GetBytes(jsonObject);
-
-        //    _sensorSocket.Send(byData);
-        //    Console.WriteLine(measurement);
-        //}
-        //catch (Exception e)
-        //{
-        //    Console.WriteLine(e.Message);
-        //}
-
-        // try
-        // {
-        //     socketForServer = new TcpClient("127.0.0.1", 6668);
-        // }
-        // //try
-        //// {
-        //     //sender.Send(MonitorUri, "POST", measurementXml.ToString());
-        // //}
-        // catch (Exception e)
-        // {
-        //     Console.WriteLine(e.Message);
-        //     //throw;
-        // }
-
-
 
         protected void Run(object state, ElapsedEventArgs args)
         {
@@ -151,13 +103,12 @@ namespace Splash.MeasurementSensor
                             catch
                             {
                                 Console.WriteLine("Exception reading from Server");
-                                IsActive = false;
+                                throw new Exception();//ServerDisconnectedException();
                             }
                         }
                     }
                 }
                 Thread.Sleep(_sleepResolution);
-
             }
 
         }

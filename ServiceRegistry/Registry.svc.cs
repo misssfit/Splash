@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Splash.Common;
 
@@ -17,7 +18,7 @@ namespace Splash.ServiceRegistry
 
         public string AssignServer()
         {
-           var result = SlaveRegistry.Instance.AssignServer();
+            var result = SlaveRegistry.Instance.AssignServer();
             return result;
         }
 
@@ -33,6 +34,12 @@ namespace Splash.ServiceRegistry
             SlaveRegistry.Instance.AssignUriToServer(serviceId, uri);
 
             return true;
+        }
+
+        public List<string> SynchronizeInactiveWorkers()
+        {
+            var inactiveServers = SlaveRegistry.Instance.GetInactiveWorkers();
+            return inactiveServers;
         }
     }
 }

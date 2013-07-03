@@ -16,5 +16,15 @@ namespace Splash.Common
         }
 
         protected abstract void OnTick(object sender, ElapsedEventArgs e);
+
+        public static Timer InitializeNewTimer(ElapsedEventHandler onTick, int interval)
+        {
+            var timer = new Timer();
+            timer.Elapsed += onTick;
+            timer.Interval = interval;
+            timer.Enabled = true;
+            timer.Start();
+            return timer;
+        }
     }
 }

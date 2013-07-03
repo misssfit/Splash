@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using Splash.Common;
 
 namespace Splash.ServiceRegistry
@@ -14,5 +15,9 @@ namespace Splash.ServiceRegistry
 
         [OperationContract]
         bool AcknowlegdeRegistration(string serviceId, string uri);
+
+        [OperationContract]
+        List<string> SynchronizeInactiveWorkers();
+
     }
 }

@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel;
 using System.ServiceModel.Description;
+using System.Threading;
 using Splash.Common;
 using Splash.RemoteServiceContract;
 using Splash.SlaveWorker.Executable.ServiceRegistry;
@@ -34,10 +35,26 @@ namespace Splash.SlaveWorker.Executable
 
         private Tuple<string, string> RegisterService()
         {
-            using (var serviceRegistry = new RegistryClient())
+            var id = string.Empty;
+            var endpoint = string.Empty;
+
+            while (string.IsNullOrWhiteSpace(id) == true)
             {
-                return Tuple.Create(serviceRegistry.Endpoint.Address.ToString(), serviceRegistry.AssignServerId());
+                try
+                {
+                    using (var serviceRegistry = new RegistryClient())
+                    {
+                        endpoint = serviceRegistry.Endpoint.Address.ToString();
+                        id = serviceRegistry.AssignServerId();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Cannot Register Worker. Retrying...");
+                    Console.WriteLine("Exception details: " + e.Message);
+                }
             }
+            return Tuple.Create(endpoint, id);
         }
 
         private Uri Connect(string serviceId)
@@ -60,9 +77,22 @@ namespace Splash.SlaveWorker.Executable
 
         private void CompleteRegistrationProcess(Uri serverUri)
         {
-            using (var serviceRegistry = new RegistryClient())
+            var result = false;
+            while (result == false)
             {
-                serviceRegistry.AcknowlegdeRegistration(Id, serverUri.ToString());
+                try
+                {
+                    using (var serviceRegistry = new RegistryClient())
+                    {
+                        result = serviceRegistry.AcknowlegdeRegistration(Id, serverUri.ToString());
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Cannot AcknowlegdeRegistration. Retrying...");
+                    Console.WriteLine("Exception details: " + e.Message);
+                }
+
             }
         }
     }

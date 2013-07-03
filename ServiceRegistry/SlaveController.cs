@@ -38,7 +38,7 @@ namespace Splash.ServiceRegistry
                 {
                     if (_socketHolder.ContainsKey(remoteEndpoint) == false)
                     {
-                        _socketHolder.Add(remoteEndpoint, socket);
+                        _socketHolder.Add(remoteEndpoint,  socket);
                         var thread = new Thread(ReadSocket);
                         thread.Start(remoteEndpoint);
                     }
@@ -52,28 +52,38 @@ namespace Splash.ServiceRegistry
         public void ReadSocket(object remoteEndpoint)
         {
             Socket socket = _socketHolder[(string)remoteEndpoint];
-            while (IsActive)
+            var id = string.Empty;
+
+            bool isSocketActive = true;
+            while (IsActive == true && isSocketActive == true)
             {
-                if (socket.Connected)
+                if (socket.Connected == true)
                 {
                     try
                     {
-                        ReceiveMessage(socket);
+                        var currentId = ReceiveMessage(socket);
+                        if (string.IsNullOrWhiteSpace(id) == true)
+                        {
+                            id = currentId;
+                           // SlaveRegistry.Instance.SetWorkerStatus(id, WorkerStatus.Connected);
+                        }
                     }
                     catch (Exception)
                     {
-                        IsActive = false;
+                        isSocketActive = false;
                     }
                 }
                 else
                 {
-                    IsActive = false;
+                    isSocketActive = false;
                 }
             }
             _socketHolder.Remove((string)remoteEndpoint);
+            SlaveRegistry.Instance.SetWorkerStatus(id, WorkerStatus.Faulted);
+
         }
 
-        private void ReceiveMessage(Socket socket)
+        private string ReceiveMessage(Socket socket)
         {
             var buffer = new byte[1024];
             int iRx = socket.Receive(buffer);
@@ -81,16 +91,17 @@ namespace Splash.ServiceRegistry
 
             _decoder.GetChars(buffer, 0, iRx, chars, 0);
             var recv = new string(chars);
-            HandleMessage(recv);
+            return HandleMessage(recv);
         }
 
-        private void HandleMessage(string receivedMessage)
+        private string HandleMessage(string receivedMessage)
         {
             //todo what if read more than one json msg ?
             var measurement = _javaScriptSerializer.Deserialize<Measurement>(receivedMessage);
             Console.WriteLine(measurement);
 
             SlaveRegistry.Instance.UpdateServiceStatus(measurement);
+            return measurement.ResourceId;
         }
     }
 }

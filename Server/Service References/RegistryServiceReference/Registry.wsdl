@@ -210,10 +210,49 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IRegistry_SynchronizeInactiveWorkers_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IRegistry_SynchronizeInactiveWorkers_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:8000/Registry?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:8000/Registry?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:8000/Registry?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IRegistry_AssignServer_InputMessage">
@@ -234,6 +273,12 @@
   <wsdl:message name="IRegistry_AcknowlegdeRegistration_OutputMessage">
     <wsdl:part name="parameters" element="tns:AcknowlegdeRegistrationResponse" />
   </wsdl:message>
+  <wsdl:message name="IRegistry_SynchronizeInactiveWorkers_InputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeInactiveWorkers" />
+  </wsdl:message>
+  <wsdl:message name="IRegistry_SynchronizeInactiveWorkers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SynchronizeInactiveWorkersResponse" />
+  </wsdl:message>
   <wsdl:portType name="IRegistry">
     <wsdl:operation name="AssignServer">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistry/AssignServer" message="tns:IRegistry_AssignServer_InputMessage" />
@@ -246,6 +291,10 @@
     <wsdl:operation name="AcknowlegdeRegistration">
       <wsdl:input wsaw:Action="http://tempuri.org/IRegistry/AcknowlegdeRegistration" message="tns:IRegistry_AcknowlegdeRegistration_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IRegistry/AcknowlegdeRegistrationResponse" message="tns:IRegistry_AcknowlegdeRegistration_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeInactiveWorkers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistry/SynchronizeInactiveWorkers" message="tns:IRegistry_SynchronizeInactiveWorkers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistry/SynchronizeInactiveWorkersResponse" message="tns:IRegistry_SynchronizeInactiveWorkers_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="WSHttpBinding_IRegistry" type="tns:IRegistry">
@@ -281,6 +330,17 @@
       </wsdl:input>
       <wsdl:output>
         <wsp:PolicyReference URI="#WSHttpBinding_IRegistry_AcknowlegdeRegistration_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SynchronizeInactiveWorkers">
+      <soap12:operation soapAction="http://tempuri.org/IRegistry/SynchronizeInactiveWorkers" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IRegistry_SynchronizeInactiveWorkers_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IRegistry_SynchronizeInactiveWorkers_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

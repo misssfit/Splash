@@ -73,6 +73,7 @@
     <Compile Include="SlaveController.cs" />
     <Compile Include="SlaveRegistry.cs" />
     <Compile Include="SlaveServerMetadata.cs" />
+    <Compile Include="WorkerStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
