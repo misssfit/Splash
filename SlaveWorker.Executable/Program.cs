@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Splash.SlaveWorker.Executable
 {
@@ -8,7 +9,16 @@ namespace Splash.SlaveWorker.Executable
         {
             var worker = new WorkerExecutable();
             worker.Initialise();
-            Console.ReadLine();
+
+            worker.Join();
+
+            while (worker.Exceptions.Any() == true)
+            {
+               // worker.Reconnect();
+                worker = new WorkerExecutable();
+                worker.Initialise();
+                worker.Join();
+            }
         }
     }
 }

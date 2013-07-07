@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Timers;
 using Splash.Common;
+using Splash.Common.Logging;
 using Splash.Server.RegistryServiceReference;
 
 namespace Splash.Server
@@ -28,7 +29,10 @@ namespace Splash.Server
         {
             lock (_inactiveWorkers)
             {//todo: remeve based on datetime
+                Logger.Instance.LogInfo(string.Format("Inactive workers base cleaned with Registry. {0} removed", _inactiveWorkers.Count));
                 _inactiveWorkers.Clear();
+
+
             }
         }
 
@@ -41,6 +45,8 @@ namespace Splash.Server
                     var inactive = registry.SynchronizeInactiveWorkers().ToList();
                     lock (_inactiveWorkers)
                     {
+                        Logger.Instance.LogInfo(string.Format("Inactive workers synchronized with Registry. {0} found", inactive.Count));
+
                         _inactiveWorkers.AddRange(inactive);
                         _inactiveWorkers = _inactiveWorkers.Distinct().ToList();
                     }
@@ -88,6 +94,8 @@ namespace Splash.Server
             {
                 if (_dictionary.ContainsKey(id) == true)
                 {
+                    Logger.Instance.LogInfo(string.Format("Assigned Worker removed from dictionary: {0}", id));
+
                     _dictionary.Remove(id);
                 }
             }

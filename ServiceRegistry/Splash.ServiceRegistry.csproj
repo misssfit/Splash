@@ -69,6 +69,7 @@
       <DependentUpon>Registry.svc</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestStatus.cs" />
     <Compile Include="ServerStatus.cs" />
     <Compile Include="SlaveController.cs" />
     <Compile Include="SlaveRegistry.cs" />
@@ -90,6 +91,10 @@
     <ProjectReference Include="..\Common\Splash.Common.csproj">
       <Project>{a5379f4c-f49b-4eb2-8f7d-0abdcb95ee5c}</Project>
       <Name>Splash.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RemoteServiceContract\Splash.RemoteServiceContract.csproj">
+      <Project>{4EFF0392-9AAE-40EE-BD70-FB95A0DCA167}</Project>
+      <Name>Splash.RemoteServiceContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\SlaveWorker\Splash.SlaveWorker.csproj">
       <Project>{34D3DF14-6C29-4267-A51B-4C018A3AD071}</Project>

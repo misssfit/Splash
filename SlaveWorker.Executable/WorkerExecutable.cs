@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -19,6 +20,20 @@ namespace Splash.SlaveWorker.Executable
 
         public string Id { get; private set; }
         public string WorkerUri { get; private set; }
+        private List<Exception> _exceptions = new List<Exception>();
+        public List<Exception> Exceptions
+        {
+            get
+            {
+                var result = new List<Exception>();
+                if (_queueSensor != null)
+                {
+                    result.AddRange(_queueSensor.Exceptions);
+                }
+                result.AddRange(_exceptions);
+                return result;
+            }
+        }
 
         public void Initialise()
         {
@@ -26,9 +41,13 @@ namespace Splash.SlaveWorker.Executable
             Id = id.Item2;
             Uri uri = Connect(Id);
             WorkerUri = uri.ToString();
-            CompleteRegistrationProcess(uri);
+            var registrationResult = CompleteRegistrationProcess(uri);
+            if (registrationResult == false)
+            {
+                return;
+            }
             string hostName = new Uri(id.Item1).Host;
-            IPAddress ip = Dns.GetHostAddresses(hostName)[0];
+            IPAddress ip = Dns.GetHostAddresses(hostName).Where(p => p.AddressFamily == AddressFamily.InterNetwork).First();
             _queueSensor = new QueueSnsor(10000, Id);
             _queueSensor.Connect(ip.ToString(), 8001);
         }
@@ -75,7 +94,7 @@ namespace Splash.SlaveWorker.Executable
                         ":8090/Worker/" + serviceId + "/");
         }
 
-        private void CompleteRegistrationProcess(Uri serverUri)
+        private bool CompleteRegistrationProcess(Uri serverUri)
         {
             var result = false;
             while (result == false)
@@ -84,7 +103,16 @@ namespace Splash.SlaveWorker.Executable
                 {
                     using (var serviceRegistry = new RegistryClient())
                     {
-                        result = serviceRegistry.AcknowlegdeRegistration(Id, serverUri.ToString());
+                        var response = serviceRegistry.AcknowlegdeRegistration(Id, serverUri.ToString());
+                        if (response == true)
+                        {
+                            result = true;
+                        }
+                        else
+                        {
+                            _exceptions.Add(new Exception("Registry does not contain current worker ID = " + Id));
+                            return false;
+                        }
                     }
                 }
                 catch (Exception e)
@@ -94,6 +122,20 @@ namespace Splash.SlaveWorker.Executable
                 }
 
             }
+            return true;
+        }
+
+        internal void Join()
+        {
+            if (_queueSensor != null)
+            {
+                _queueSensor.Join();
+            }
+        }
+
+        internal void Reconnect()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,9 +1,13 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
 
 namespace Splash.Common
 {
     public abstract class ActiveObject
     {
+        public ActiveObject() { Exceptions = new List<Exception>(); }
+
         protected Thread _thread;
         public bool IsActive { get; protected set; }
 
@@ -21,5 +25,21 @@ namespace Splash.Common
         }
 
         protected abstract void PerformAction();
+
+        public void Join()
+        {
+            try
+            {
+                _thread.Join();
+
+            }
+            catch (Exception e)
+            {
+
+                Exceptions.Add(e);
+            }
+        }
+
+        public List<Exception> Exceptions { get; protected set; }
     }
 }

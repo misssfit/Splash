@@ -14,5 +14,9 @@ namespace Splash.RemoteServiceContract
 
         [OperationContract]
         CalculationResult GetResult(string id);
+
+
+        [OperationContract]
+        OperationStatus DeleteTask(string id);
     }
 }

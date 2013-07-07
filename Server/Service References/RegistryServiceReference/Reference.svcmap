@@ -22,11 +22,13 @@
     <MetadataSource Address="http://localhost:8000/Registry" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Registry.xsd" MetadataType="Schema" ID="83ced606-148e-4823-a723-cf92ab4560c6" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd1" />
-    <MetadataFile FileName="Registry2.xsd" MetadataType="Schema" ID="664df7c1-fb7f-4644-a34d-13043b394baf" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd2" />
     <MetadataFile FileName="Registry.disco" MetadataType="Disco" ID="f0b25d65-f643-4465-8df9-e7b4a3a89934" SourceId="1" SourceUrl="http://localhost:8000/Registry?disco" />
-    <MetadataFile FileName="Registry1.xsd" MetadataType="Schema" ID="d2a96d88-0de6-419b-bc04-be4db660ef4d" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd0" />
     <MetadataFile FileName="Registry.wsdl" MetadataType="Wsdl" ID="fed5f762-a103-4a6a-8b7b-9830b23748bc" SourceId="1" SourceUrl="http://localhost:8000/Registry?wsdl" />
+    <MetadataFile FileName="Registry1.xsd" MetadataType="Schema" ID="d2a96d88-0de6-419b-bc04-be4db660ef4d" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd0" />
+    <MetadataFile FileName="Registry3.xsd" MetadataType="Schema" ID="15a92b76-f8c9-4e7f-932d-44e8da803a8e" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd4" />
+    <MetadataFile FileName="Registry2.xsd" MetadataType="Schema" ID="664df7c1-fb7f-4644-a34d-13043b394baf" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd2" />
+    <MetadataFile FileName="Registry31.xsd" MetadataType="Schema" ID="c9ba8075-b44f-4ca5-8cc7-3ea1d7e5f0a5" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd3" />
+    <MetadataFile FileName="Registry.xsd" MetadataType="Schema" ID="83ced606-148e-4823-a723-cf92ab4560c6" SourceId="1" SourceUrl="http://localhost:8000/Registry?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

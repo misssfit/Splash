@@ -8,7 +8,7 @@ namespace Splash.ServiceRegistry
     public interface IRegistry
     {
         [OperationContract]
-        string AssignServer();
+        StringRequestStatus AssignServer();
 
         [OperationContract]
         string AssignServerId();

@@ -12,7 +12,7 @@ namespace Splash.ServiceRegistry
         private readonly object _lock = new object();
         private Timer _cleanRegistryTimer;
         private List<string> _recentlyRemovedWorkers;
- 
+
         public SlaveRegistry()
         {
             _registredServers = new List<SlaveServerMetadata>();
@@ -59,13 +59,19 @@ namespace Splash.ServiceRegistry
             }
         }
 
-        public void AssignUriToServer(string serviceId, string uri)
+        public bool AssignUriToServer(string serviceId, string uri)
         {
             lock (_lock)
             {
+                if (_registredServers.Any(p => p.Id == serviceId) == false)
+                {
+                    return false;
+                }
+
                 SlaveServerMetadata server = _registredServers.Single(p => p.Id == serviceId);
                 server.Uri = uri;
                 server.Status = WorkerStatus.Registred;
+                return true;
             }
         }
 
@@ -87,8 +93,19 @@ namespace Splash.ServiceRegistry
         {
             lock (_lock)
             {
-                return _registredServers.First().Uri;
+                if (_registredServers.Any(p => p.Status == WorkerStatus.Connected) == true)
+                {
+
+                    return
+                        _registredServers.Where(p => p.Status == WorkerStatus.Connected).First(p => p.PerformanceMetric == _registredServers.Min(q => q.PerformanceMetric))
+                                         .Uri;
+                }
+                else
+                {
+                    return null;
+                }
             }
+
         }
 
         internal void SetWorkerStatus(string resourceId, WorkerStatus workerStatus)

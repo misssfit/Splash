@@ -9,17 +9,80 @@
 //------------------------------------------------------------------------------
 
 namespace Splash.Server.RegistryServiceReference {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StringRequestStatus", Namespace="http://schemas.datacontract.org/2004/07/Splash.ServiceRegistry")]
+    [System.SerializableAttribute()]
+    public partial class StringRequestStatus : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Splash.RemoteServiceContract.RequestStatus StatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Data {
+            get {
+                return this.DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DataField, value) != true)) {
+                    this.DataField = value;
+                    this.RaisePropertyChanged("Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Splash.RemoteServiceContract.RequestStatus Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RegistryServiceReference.IRegistry")]
     public interface IRegistry {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/AssignServer", ReplyAction="http://tempuri.org/IRegistry/AssignServerResponse")]
-        string AssignServer();
+        Splash.Server.RegistryServiceReference.StringRequestStatus AssignServer();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/AssignServer", ReplyAction="http://tempuri.org/IRegistry/AssignServerResponse")]
-        System.Threading.Tasks.Task<string> AssignServerAsync();
+        System.Threading.Tasks.Task<Splash.Server.RegistryServiceReference.StringRequestStatus> AssignServerAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistry/AssignServerId", ReplyAction="http://tempuri.org/IRegistry/AssignServerIdResponse")]
         string AssignServerId();
@@ -67,11 +130,11 @@ namespace Splash.Server.RegistryServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public string AssignServer() {
+        public Splash.Server.RegistryServiceReference.StringRequestStatus AssignServer() {
             return base.Channel.AssignServer();
         }
         
-        public System.Threading.Tasks.Task<string> AssignServerAsync() {
+        public System.Threading.Tasks.Task<Splash.Server.RegistryServiceReference.StringRequestStatus> AssignServerAsync() {
             return base.Channel.AssignServerAsync();
         }
         

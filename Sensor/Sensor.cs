@@ -50,21 +50,37 @@ namespace Splash.MeasurementSensor
 
         public void Connect(string host, int port)
         {
-            _clock.Enabled = true;
-            _clock.Start();
-            IsWorking = true;
-            _hostEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _socket.Connect("127.0.0.1", port);
-            Run();
-
+            try
+            {
+                _clock.Enabled = true;
+                _clock.Start();
+                IsWorking = true;
+                _hostEndPoint = new IPEndPoint(IPAddress.Parse(host), port);
+                _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                _socket.Connect(host, port);
+                Run();
+            }
+            catch (Exception e)
+            {
+                IsWorking = false;
+                IsActive = false;
+                Exceptions.Add(e);
+            }
         }
 
         public void Disconnect()
         {
-            _clock.Stop();
+            try
+            {
+                _clock.Stop();
+                _socket.Close();
+            }
+            catch (Exception e)
+            {
+                Exceptions.Add(e);
+                throw;
+            }
 
-            _socket.Close();
         }
 
         protected void Send(Measurement measurement)
@@ -100,10 +116,11 @@ namespace Splash.MeasurementSensor
                                 byte[] byteBuffer = Encoding.ASCII.GetBytes(_queue.Dequeue());
                                 _socket.Send(byteBuffer);
                             }
-                            catch
+                            catch (Exception e)
                             {
                                 Console.WriteLine("Exception reading from Server");
-                                throw new Exception();//ServerDisconnectedException();
+                                Exceptions.Add(e);
+                                IsActive = false;
                             }
                         }
                     }

@@ -20,5 +20,10 @@ namespace Splash.Server
             return Channel.GetResult(id);
 
         }
+
+        public OperationStatus DeleteTask(string id)
+        {
+            return Channel.DeleteTask(id);
+        }
     }
 }

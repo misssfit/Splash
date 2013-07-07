@@ -43,6 +43,9 @@
     <Compile Include="ActiveObject.cs" />
     <Compile Include="ConfigurationManager.cs" />
     <Compile Include="HttpSender.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\LogLevel.cs" />
     <Compile Include="Measurement.cs" />
     <Compile Include="ServerConnectionInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
